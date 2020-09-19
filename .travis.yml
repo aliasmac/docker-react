@@ -8,3 +8,16 @@ before_install:
 
 script: # contains all diff comands that need to be executed e.g. for test to run 
   - docker run -e CI=true thexyman/docker-react npm run test # forces Jest to run in CI-mode, i.e. exits after first run 
+
+# Deploy to EBS
+deploy: 
+  provider: elasticbeanstalk 
+  region: "eu-west-2"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "arn:aws:s3:::elasticbeanstalk-eu-west-2-210226449536"
+  bucket_path: "docker-react"
+  on:
+    branch: master # deploy only when main gets a change of code
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
