@@ -1,7 +1,7 @@
 # Everything from this line is part of the builder phase - obj to isntall deps and build app
 FROM node:alpine
 WORKDIR '/app'
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 # Copy from current source to app
 COPY . . 

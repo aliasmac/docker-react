@@ -9,7 +9,7 @@ before_install:
 script: # contains all diff comands that need to be executed e.g. for test to run 
   - docker run -e CI=true thexyman/docker-react npm run test # forces Jest to run in CI-mode, i.e. exits after first run 
 
-# Deploy to EBS
+# Deploy to EBS, 
 deploy: 
   provider: elasticbeanstalk 
   region: "eu-west-2"
