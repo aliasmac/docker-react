@@ -1,0 +1,20 @@
+version: '3'
+services: 
+  web: 
+    build:
+      context: . # forces compose to use Dockerfile.dev (instead of dot that signfifies looking in current direcoty for default Dockerfile
+      dockerfile: Dockerfile.dev 
+    ports: 
+      - "3000:3000"
+    volumes: # this creates the dynamic link between running container and our local files
+      - /app/node_modules # replaces -v /app/node_modules
+      - .:/app/ # replaces -v $(pwd):/app
+    stdin_open: true # need this due to bug introduced by update to crp
+  tests:
+    build:
+      context: . 
+      dockerfile: Dockerfile.dev 
+    volumes: 
+      - /app/node_modules
+      - .:/app/ 
+    command: ["npm", "run", "test"]
