@@ -1,0 +1,10 @@
+language: generic 
+sudo: required # we need super user permission when making use of docker 
+services:
+  - docker # we need docker cli pre installed, travis installs docker 
+
+before_install:
+  - docker build -t thexyman/docker-react -f Dockerfile.dev . # build the image, FYI tag can be anythin since its only used within travis env
+
+script: # contains all diff comands that need to be executed e.g. for test to run 
+  - docker run -e CI=true thexyman/docker-react npm run test # forces Jest to run in CI-mode, i.e. exits after first run 
